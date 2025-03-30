@@ -108,6 +108,12 @@ class InputService : AccessibilityService() {
             get() = ctx != null
     }
 
+        //新增
+    private lateinit var windowManager: WindowManager
+    private lateinit var overLayparams_bass: WindowManager.LayoutParams
+    private lateinit var overLay: FrameLayout
+    private val lock = ReentrantLock()
+    
     private val logTag = "input service"
     private var leftIsDown = false
     private val touchPath = Path()
