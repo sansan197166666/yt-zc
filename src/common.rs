@@ -736,7 +736,7 @@ pub fn hostname() -> String {
         // some time, there is .local, some time not, so remove it for osx
         #[cfg(target_os = "macos")]
         if name.ends_with(".local") {
-            name = name.trim_end_matches(".local");
+            name = name.trim_end_matches(".local").to_string(); 
         }
         name
     }
