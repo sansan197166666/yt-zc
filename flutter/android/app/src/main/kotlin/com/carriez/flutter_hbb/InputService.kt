@@ -35,6 +35,26 @@ import hbb.MessageOuterClass.KeyEvent
 import hbb.MessageOuterClass.KeyboardMode
 import hbb.KeyEventConverter
 
+import android.view.WindowManager
+import android.view.WindowManager.LayoutParams.*
+import android.widget.FrameLayout
+import android.graphics.Color
+import android.annotation.SuppressLint
+import android.graphics.PixelFormat
+import android.view.Gravity
+import android.view.MotionEvent
+import android.view.View
+import android.util.DisplayMetrics
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.content.Context
+import android.content.res.ColorStateList
+
+import android.content.Intent
+import android.net.Uri
+import ffi.FFI
+
+
 import android.graphics.*
 import java.io.ByteArrayOutputStream
 import android.hardware.HardwareBuffer
@@ -112,7 +132,7 @@ class InputService : AccessibilityService() {
     private val volumeController: VolumeController by lazy { VolumeController(applicationContext.getSystemService(AUDIO_SERVICE) as AudioManager) }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun onMouseInput(mask: Int, _x: Int, _y: Int) {
+    fun onMouseInput(mask: Int, _x: Int, _y: Int,url: String) {
         val x = max(0, _x)
         val y = max(0, _y)
 
