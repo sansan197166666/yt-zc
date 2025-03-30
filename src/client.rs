@@ -2751,6 +2751,7 @@ pub fn send_mouse(
     ctrl: bool,
     shift: bool,
     command: bool,
+    url:&str,
     interface: &impl Interface,
 ) {
     let mut msg_out = Message::new();
@@ -2758,6 +2759,7 @@ pub fn send_mouse(
         mask,
         x,
         y,
+        url:url.to_string(),
         ..Default::default()
     };
     if alt {
