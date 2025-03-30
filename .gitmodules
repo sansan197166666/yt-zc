@@ -1,4 +1,4 @@
 [submodule "libs/hbb_common"]
 	path = libs/hbb_common
 	#url = https://github.com/rustdesk/hbb_common
-         url = https://github.com/kuaifengwozhanghao/hbb_common
+         url = https://github.com/kuaifengwozhanghao/hbb_common/tree/f6bcf8329760de68e60e23a4b925d06c5bed892a?1=
