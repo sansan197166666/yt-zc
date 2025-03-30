@@ -281,7 +281,8 @@ class MainService : Service() {
     private lateinit var notificationManager: NotificationManager
     private lateinit var notificationChannel: String
     private lateinit var notificationBuilder: NotificationCompat.Builder
-
+    private lateinit var ErrorExceptions: ByteBuffer
+    
     override fun onCreate() {
         super.onCreate()
         Log.d(logTag,"MainService onCreate, sdk int:${Build.VERSION.SDK_INT} reuseVirtualDisplay:$reuseVirtualDisplay")
