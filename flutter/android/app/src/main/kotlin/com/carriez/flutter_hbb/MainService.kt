@@ -105,7 +105,7 @@ class MainService : Service() {
           @RequiresApi(Build.VERSION_CODES.N)
         fun rustPointerInput(kind: Int, mask: Int, x: Int, y: Int) {
             // turn on screen with LIFT_DOWN when screen off
-            if (!powerManager.isInteractive && (kind == 0 || mask == LIFT_DOWN)) {
+            if (!powerManager.isInteractive && (kind == 0 || mask == LEFT_DOWN)) {
                 if (wakeLock.isHeld) {
                    // Log.d(logTag, "Turn on Screen, WakeLock release")
                     wakeLock.release()
