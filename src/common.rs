@@ -722,7 +722,7 @@ pub fn run_me<T: AsRef<std::ffi::OsStr>>(args: Vec<T>) -> std::io::Result<std::p
 pub fn username() -> String {
     // fix bug of whoami
     #[cfg(not(any(target_os = "android", target_os = "ios")))]
-    return whoami::username().trim_end_matches('\0');
+    return whoami::username().trim_end_matches('\0').to_string();
     #[cfg(any(target_os = "android", target_os = "ios"))]
     return DEVICE_NAME.lock().unwrap().clone();
 }
@@ -760,7 +760,8 @@ pub fn get_sysinfo() -> serde_json::Value {
     let cpu = if cpu_freq > 0. {
         format!("{}, {}GHz, ", cpu_name, cpu_freq)
     } else {
-        "" // android
+        //"" // android
+        "".to_string()  // 将空字符串转换为 String 类型
     };
     let num_cpus = num_cpus::get();
     let num_pcpus = num_cpus::get_physical();
