@@ -1595,7 +1595,7 @@ pub fn main_load_group() -> String {
 pub fn session_send_pointer(session_id: SessionID, msg: String) {
     super::flutter::session_send_pointer(session_id, msg);
 }
-
+/*
 pub fn session_send_mouse2(session_id: SessionID, msg: String) {
     if let Ok(m) = serde_json::from_str::<HashMap<String, String>>(&msg) {
         let alt = m.get("alt").is_some();
@@ -1634,7 +1634,7 @@ pub fn session_send_mouse2(session_id: SessionID, msg: String) {
             session.send_mouse(mask, x, y, alt, ctrl, shift, command);
         }
     }
-}
+}*/
 
 pub fn session_send_mouse(session_id: SessionID, msg: String) {
     if let Ok(m) = serde_json::from_str::<HashMap<String, String>>(&msg) {
