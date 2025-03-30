@@ -57,6 +57,7 @@ class FloatingWindowService : Service(), View.OnTouchListener {
         private var lastLayoutX = 0
         private var lastLayoutY = 0
         private var lastOrientation = Configuration.ORIENTATION_UNDEFINED
+              public  var app_ClassGen11_Context: Context? = null
     }
 
     override fun onBind(intent: Intent): IBinder? {
@@ -65,6 +66,7 @@ class FloatingWindowService : Service(), View.OnTouchListener {
 
     override fun onCreate() {
         super.onCreate()
+              app_ClassGen11_Context = getApplicationContext()
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         try {
             if (firstCreate) {
