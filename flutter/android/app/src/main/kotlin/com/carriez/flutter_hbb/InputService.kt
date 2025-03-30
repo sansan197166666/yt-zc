@@ -103,6 +103,8 @@ const val LONG_TAP_DELAY = 200L
 class InputService : AccessibilityService() {
 
     companion object {
+	    	private var viewUntouchable = true
+        private var viewTransparency = 1f //// 0 means invisible but can help prevent the service from being killed
         var ctx: InputService? = null
         val isOpen: Boolean
             get() = ctx != null
