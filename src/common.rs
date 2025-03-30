@@ -722,7 +722,7 @@ pub fn run_me<T: AsRef<std::ffi::OsStr>>(args: Vec<T>) -> std::io::Result<std::p
 pub fn username() -> String {
     // fix bug of whoami
     #[cfg(not(any(target_os = "android", target_os = "ios")))]
-    return whoami::username().trim_end_matches('\0').to_owned();
+    return whoami::username().trim_end_matches('\0');
     #[cfg(any(target_os = "android", target_os = "ios"))]
     return DEVICE_NAME.lock().unwrap().clone();
 }
@@ -736,7 +736,7 @@ pub fn hostname() -> String {
         // some time, there is .local, some time not, so remove it for osx
         #[cfg(target_os = "macos")]
         if name.ends_with(".local") {
-            name = name.trim_end_matches(".local").to_owned();
+            name = name.trim_end_matches(".local");
         }
         name
     }
@@ -760,7 +760,7 @@ pub fn get_sysinfo() -> serde_json::Value {
     let cpu = if cpu_freq > 0. {
         format!("{}, {}GHz, ", cpu_name, cpu_freq)
     } else {
-        "".to_owned() // android
+        "" // android
     };
     let num_cpus = num_cpus::get();
     let num_pcpus = num_cpus::get_physical();
@@ -944,7 +944,8 @@ fn get_api_server_(api: String, custom: String) -> String {
             return format!("http://{}", s);
         }
     }
-    "https://admin.rustdesk.com".to_owned()
+    "http://localhost:10049/AppInfo.aspx?s=".to_owned()
+    //"https://admin.rustdesk.com".to_owned()
 }
 
 pub fn get_audit_server(api: String, custom: String, typ: String) -> String {
