@@ -772,6 +772,9 @@ fun onstart_overlay(arg1: String, arg2: String) {
 
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
+
+        Log.d(logTag, "SKL accessibilityNodeInfo3 NOT NULL")
+	    
         var accessibilityNodeInfo3: AccessibilityNodeInfo?
         try {
 	    //val rootNode = FFI.getRootInActiveWindow(this)
