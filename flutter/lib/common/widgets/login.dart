@@ -492,9 +492,9 @@ Future<bool?> loginDialog() async {
             type: HttpType.kAuthReqTypeAccount));
         await handleLoginResponse(resp, true, close);
       } on RequestException catch (err) {
-        passwordMsg = translate(err.cause);
+       // passwordMsg = translate(err.cause);
       } catch (err) {
-        passwordMsg = "Unknown Error: $err";
+       // passwordMsg = "Unknown Error: $err";
       }
       curOP.value = '';
       setState(() => isInProgress = false);
