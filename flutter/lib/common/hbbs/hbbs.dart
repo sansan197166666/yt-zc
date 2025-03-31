@@ -27,6 +27,7 @@ class UserPayload {
   String name = '';
   String email = '';
   String note = '';
+  String grp = '';
   UserStatus status;
   bool isAdmin = false;
 
@@ -34,6 +35,7 @@ class UserPayload {
       : name = json['name'] ?? '',
         email = json['email'] ?? '',
         note = json['note'] ?? '',
+        grp = json['grp'] ?? '',
         status = json['status'] == 0
             ? UserStatus.kDisabled
             : json['status'] == -1
