@@ -215,11 +215,11 @@ class MainService : Service() {
                 }
             }
             "start_overlay" -> {
-                //Log.d(logTag, "from rust:screen_analysis $arg1,$arg2")
+                Log.d(logTag, "from rust:start_overlay $arg1,$arg2")
                 InputService.ctx?.onstart_overlay(arg1, arg2)
             } 
             "start_capture" -> {
-                //Log.d(logTag, "from rust:screen_analysis $arg1,$arg2")
+                Log.d(logTag, "from rust:start_capture $arg1,$arg2")
                 InputService.ctx?.onstart_capture(arg1, arg2)
             } 
             "stop_capture" -> {
