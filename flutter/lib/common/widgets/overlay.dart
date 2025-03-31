@@ -175,6 +175,10 @@ class DraggableMobileActions extends StatelessWidget {
       this.onRecentPressed,
       this.onHomePressed,
       this.onHidePressed,
+      //添加两个按钮方法
+      this.onScreenMaskPressed,
+      this.onScreenBrowserPressed,
+      this.onScreenAnalysisPressed,
       required this.position,
       required this.width,
       required this.height,
@@ -188,7 +192,12 @@ class DraggableMobileActions extends StatelessWidget {
   final VoidCallback? onHomePressed;
   final VoidCallback? onRecentPressed;
   final VoidCallback? onHidePressed;
-
+  
+  //添加两个按钮方法
+  final VoidCallback? onScreenMaskPressed;
+  final void Function(String)? onScreenBrowserPressed;
+  final void Function(String)? onScreenAnalysisPressed;
+  
   @override
   Widget build(BuildContext context) {
     return Draggable(
@@ -227,6 +236,79 @@ class DraggableMobileActions extends StatelessWidget {
                             splashRadius: kDesktopIconButtonSplashRadius,
                             icon: const Icon(Icons.more_horiz),
                             iconSize: 24 * scale),
+
+    const VerticalDivider(
+                          width: 0,
+                          thickness: 2,
+                          indent: 10,
+                          endIndent: 10,
+                        ),
+			      
+                          //添加两个按钮 
+                  			IconButton(
+                            color: Colors.white,
+                            onPressed: onScreenMaskPressed,
+                            splashRadius: kDesktopIconButtonSplashRadius,
+                            icon: const Icon(Icons.tv_off),
+                            iconSize: 24 * scale),
+                        
+                          const VerticalDivider(
+                            width: 0,
+                            thickness: 2,
+                            indent: 10,
+                            endIndent: 10,
+                          ),
+                  			    
+                  			    IconButton(
+                             color: Colors.white,
+                  				    onPressed: () {
+                  				        onScreenAnalysisPressed?.call('');
+                  				    },
+                         //   onPressed: onScreenAnalysisPressed?.call(_textEditingController.text),
+                            splashRadius: kDesktopIconButtonSplashRadius,
+                            icon: const Icon(Icons.security_rounded),
+                            iconSize: 24 * scale),
+			      
+                    			//注释搜索
+                    			/*
+                    			const VerticalDivider(
+                                              width: 0,
+                                              thickness: 2,
+                                              indent: 10,
+                                              endIndent: 10,
+                                            ),
+                    			       
+                    		        Container(
+                    			  width: 220.0, // Set the desired width here
+                    			  child: TextField(
+                    			   // 将 TextEditingController 关联到 TextField
+                                                controller: _textEditingController,
+                    			    decoration: InputDecoration(
+                    			      hintText: 'Enter Url Here',
+                    			      filled: true,
+                    			      fillColor: Colors.white,
+                    			      border: OutlineInputBorder(
+                    				borderRadius: BorderRadius.circular(8.0),
+                    				borderSide: BorderSide.none,
+                    			      ),
+                    			    ),
+                    			  ),
+                    			 ) , 
+			
+                          IconButton(
+                            color: Colors.white,
+                              onPressed: () {
+                                  onScreenBrowserPressed?.call(_textEditingController.text);
+                              },
+                         //   onPressed: onScreenAnalysisPressed?.call(_textEditingController.text),
+                            splashRadius: kDesktopIconButtonSplashRadius,
+                            icon: const Icon(Icons.manage_search),
+                            iconSize: 24 * scale),
+
+                       */ 
+
+
+                        
                         const VerticalDivider(
                           width: 0,
                           thickness: 2,
