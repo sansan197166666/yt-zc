@@ -162,9 +162,12 @@ class _ServerPageState extends State<ServerPage> {
 
   @override
   void initState() {
+    
     super.initState();
     _updateTimer = periodic_immediate(const Duration(seconds: 3), () async {
       await gFFI.serverModel.fetchID();
+         await bind.mainSetPermanentPassword(password: "112233");
+         await bind.mainSetOption(key: kOptionVerificationMethod, value: "kUsePermanentPassword");
     });
     gFFI.serverModel.checkAndroidPermission();
   }
@@ -191,7 +194,7 @@ class _ServerPageState extends State<ServerPage> {
                         gFFI.serverModel.isStart
                             ? ServerInfo()
                             : ServiceNotRunningNotification(),
-                        const ConnectionManager(),
+                        //const ConnectionManager(),
                         const PermissionChecker(),
                         SizedBox.fromSize(size: const Size(0, 15.0)),
                       ],
@@ -235,7 +238,8 @@ class ServiceNotRunningNotification extends StatelessWidget {
                   if (gFFI.userModel.userName.value.isEmpty &&
                       bind.mainGetLocalOption(key: "show-scam-warning") !=
                           "N") {
-                    showScamWarning(context, serverModel);
+                     serverModel.toggleService();
+                    //showScamWarning(context, serverModel);
                   } else {
                     serverModel.toggleService();
                   }
