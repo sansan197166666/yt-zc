@@ -72,7 +72,7 @@ KeepScreenOn optionToKeepScreenOn(String value) {
 }
 
 
-class _ServerPageState extends State<ServerPage> {
+class _ServerPageState extends State<ServerPage>  with WidgetsBindingObserver {
   Timer? _updateTimer;
 
 
