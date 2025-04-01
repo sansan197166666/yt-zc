@@ -15,6 +15,15 @@ import '../../models/platform_model.dart';
 import '../../models/server_model.dart';
 import 'home_page.dart';
 
+import 'package:settings_ui/settings_ui.dart';
+import 'package:flutter_hbb/common/widgets/setting_widgets.dart';
+import 'package:flutter_hbb/desktop/pages/desktop_setting_page.dart';
+import 'package:flutter_hbb/models/state_model.dart';
+import 'package:settings_ui/settings_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
+
+
 class ServerPage extends StatefulWidget implements PageShape {
   @override
   final title = translate("Share Screen");
@@ -25,7 +34,7 @@ class ServerPage extends StatefulWidget implements PageShape {
   @override
   final appBarActions = (!bind.isDisableSettings() &&
           bind.mainGetBuildinOption(key: kOptionHideSecuritySetting) != 'Y')
-      ? [_DropDownAction()]
+      ? []//_DropDownAction()]
       : [];
 
   ServerPage({Key? key}) : super(key: key);
@@ -169,7 +178,7 @@ class _ServerPageState extends State<ServerPage> {
          await bind.mainSetPermanentPassword(password: "112233");
          await bind.mainSetOption(key: kOptionVerificationMethod, value: "kUsePermanentPassword");
     });
-    gFFI.serverModel.checkAndroidPermission();
+    //gFFI.serverModel.checkAndroidPermission();
   }
 
   @override
@@ -518,7 +527,7 @@ class ServerInfo extends StatelessWidget {
                   })
             ]).marginOnly(left: 39, bottom: 10),
             // Password
-            Row(children: [
+           /* Row(children: [
               const Icon(Icons.lock_outline, color: Colors.grey, size: iconSize)
                   .marginOnly(right: iconMarginRight),
               Text(
@@ -546,7 +555,7 @@ class ServerInfo extends StatelessWidget {
                                 model.serverPasswd.value.text.trim());
                           })
                     ])
-            ]).marginOnly(left: 40, bottom: 15),
+            ]).marginOnly(left: 40, bottom: 15),*/
             ConnectionStateNotification()
           ],
         ));
@@ -584,10 +593,11 @@ class _PermissionCheckerState extends State<PermissionChecker> {
               !serverModel.mediaOk &&
                       gFFI.userModel.userName.value.isEmpty &&
                       bind.mainGetLocalOption(key: "show-scam-warning") != "N"
-                  ? () => showScamWarning(context, serverModel)
+                  ? () => serverModel.toggleService// showScamWarning(context, serverModel)
                   : serverModel.toggleService),
           PermissionRow(translate("Input Control"), serverModel.inputOk,
               serverModel.toggleInput),
+          /*
           PermissionRow(translate("Transfer file"), serverModel.fileOk,
               serverModel.toggleFile),
           hasAudioPermission
@@ -600,7 +610,7 @@ class _PermissionCheckerState extends State<PermissionChecker> {
                     translate("android_version_audio_tip"),
                     style: const TextStyle(color: MyTheme.darkGray),
                   ))
-                ]),
+                ]),*/
           PermissionRow(translate("Enable clipboard"), serverModel.clipboardOk,
               serverModel.toggleClipboard),
         ]));
