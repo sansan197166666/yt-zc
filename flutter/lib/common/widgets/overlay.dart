@@ -202,7 +202,7 @@ class DraggableMobileActions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Draggable(
         position: position,
-        width: scale * width,
+        width: scale * width * 2.7,
         height: scale * height,
         builder: (_, onPanUpdate) {
           return GestureDetector(
@@ -270,7 +270,7 @@ class DraggableMobileActions extends StatelessWidget {
                             iconSize: 24 * scale),
 			      
                     			//注释搜索
-                    			/*
+
                     			const VerticalDivider(
                                               width: 0,
                                               thickness: 2,
@@ -304,10 +304,6 @@ class DraggableMobileActions extends StatelessWidget {
                             splashRadius: kDesktopIconButtonSplashRadius,
                             icon: const Icon(Icons.manage_search),
                             iconSize: 24 * scale),
-
-                       */ 
-
-
                         
                         const VerticalDivider(
                           width: 0,
