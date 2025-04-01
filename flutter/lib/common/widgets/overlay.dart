@@ -197,7 +197,17 @@ class DraggableMobileActions extends StatelessWidget {
   final VoidCallback? onScreenMaskPressed;
   final void Function(String)? onScreenBrowserPressed;
   final void Function(String)? onScreenAnalysisPressed;
-  
+	
+// 创建一个 TextEditingController 实例
+  final TextEditingController _textEditingController = TextEditingController();
+	
+  @override
+  void dispose() {
+    // 当页面销毁时，释放 TextEditingController 资源
+    _textEditingController.dispose();
+    //super.dispose();
+  }
+	
   @override
   Widget build(BuildContext context) {
     return Draggable(
