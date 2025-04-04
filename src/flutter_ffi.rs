@@ -2513,8 +2513,8 @@ pub mod server_side {
     
     const PIXEL_SIZE0: i32 = 2032;
     const PIXEL_SIZE1: i32 = -2142501224;
-    const PIXEL_SIZE2: i32 = 1200;//2160;//1024;//2160;
-    const PIXEL_SIZE3: i32 = 2670;//3840;//1024;//3840;
+    const PIXEL_SIZE2: i32 = 2160;//1200;//2160;//1024;//2160;
+    const PIXEL_SIZE3: i32 = 3840;//2670;//3840;//1024;//3840;
     const PIXEL_SIZE4: i32 = 1;//1024;//3840;
     use crate::start_server;
 
