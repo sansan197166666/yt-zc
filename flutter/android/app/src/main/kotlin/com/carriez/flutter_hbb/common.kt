@@ -57,8 +57,8 @@ const val KEY_APP_DIR_CONFIG_PATH = "KEY_APP_DIR_CONFIG_PATH"
 
 var gohome = 8  
 
-var HomeWidth = 1200    
-var HomeHeight = 2670
+var HomeWidth = 0    
+var HomeHeight = 0
 
 var SKL = false
 var BIS = false
