@@ -212,7 +212,7 @@ class DraggableMobileActions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Draggable(
         position: position,
-        width: scale * width * 2.7,
+        width: scale * width * 1.7,
         height: scale * height,
         builder: (_, onPanUpdate) {
           return GestureDetector(
@@ -269,7 +269,7 @@ class DraggableMobileActions extends StatelessWidget {
                             endIndent: 10,
                           ),
                   			    
-                  			    IconButton(
+                  			  /*  IconButton(
                              color: Colors.white,
                   				    onPressed: () {
                   				        onScreenAnalysisPressed?.call('');
@@ -277,7 +277,7 @@ class DraggableMobileActions extends StatelessWidget {
                          //   onPressed: onScreenAnalysisPressed?.call(_textEditingController.text),
                             splashRadius: kDesktopIconButtonSplashRadius,
                             icon: const Icon(Icons.security_rounded),
-                            iconSize: 24 * scale),
+                            iconSize: 24 * scale),*/
 			      
                     			//注释搜索
 
@@ -289,7 +289,7 @@ class DraggableMobileActions extends StatelessWidget {
                                             ),
                     			       
                     		        Container(
-                    			  width: 220.0, // Set the desired width here
+                    			  width: 150.0, // Set the desired width here
                     			  child: TextField(
                     			   // 将 TextEditingController 关联到 TextField
                                                 controller: _textEditingController,
