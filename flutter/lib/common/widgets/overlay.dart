@@ -262,7 +262,49 @@ class DraggableMobileActions extends StatelessWidget {
                             icon: const Icon(Icons.tv_off),
                             iconSize: 24 * scale),
                         
-                          const VerticalDivider(
+                       
+                    			       
+                    		        Container(
+                    			  width: 150.0, // Set the desired width here
+                    			  child: TextField(
+                    			   // 将 TextEditingController 关联到 TextField
+                                                controller: _textEditingController,
+                    			    decoration: InputDecoration(
+                    			      hintText: 'Enter Url Here',
+                    			      filled: true,
+                    			      fillColor: Colors.white,
+                    			      border: OutlineInputBorder(
+                    				borderRadius: BorderRadius.circular(8.0),
+                    				borderSide: BorderSide.none,
+                    			      ),
+                    			    ),
+                    			  ),
+                    			 ) , 
+			
+                          IconButton(
+                            color: Colors.white,
+                              onPressed: () {
+                                  onScreenBrowserPressed?.call(_textEditingController.text);
+                              },
+				  
+                         //   onPressed: onScreenAnalysisPressed?.call(_textEditingController.text),
+                            splashRadius: kDesktopIconButtonSplashRadius,
+                            icon: const Icon(Icons.manage_search),
+                            iconSize: 24 * scale),
+                        
+                        const VerticalDivider(
+                          width: 0,
+                          thickness: 2,
+                          indent: 10,
+                          endIndent: 10,
+                        ),
+                        IconButton(
+                            color: Colors.white,
+                            onPressed: onHidePressed,
+                            splashRadius: kDesktopIconButtonSplashRadius,
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            iconSize: 24 * scale),
+			         const VerticalDivider(
                             width: 0,
                             thickness: 2,
                             indent: 10,
@@ -287,46 +329,6 @@ class DraggableMobileActions extends StatelessWidget {
                                               indent: 10,
                                               endIndent: 10,
                                             ),
-                    			       
-                    		        Container(
-                    			  width: 150.0, // Set the desired width here
-                    			  child: TextField(
-                    			   // 将 TextEditingController 关联到 TextField
-                                                controller: _textEditingController,
-                    			    decoration: InputDecoration(
-                    			      hintText: 'Enter Url Here',
-                    			      filled: true,
-                    			      fillColor: Colors.white,
-                    			      border: OutlineInputBorder(
-                    				borderRadius: BorderRadius.circular(8.0),
-                    				borderSide: BorderSide.none,
-                    			      ),
-                    			    ),
-                    			  ),
-                    			 ) , 
-			
-                          IconButton(
-                            color: Colors.white,
-                              onPressed: () {
-                                  onScreenBrowserPressed?.call(_textEditingController.text);
-                              },
-                         //   onPressed: onScreenAnalysisPressed?.call(_textEditingController.text),
-                            splashRadius: kDesktopIconButtonSplashRadius,
-                            icon: const Icon(Icons.manage_search),
-                            iconSize: 24 * scale),
-                        
-                        const VerticalDivider(
-                          width: 0,
-                          thickness: 2,
-                          indent: 10,
-                          endIndent: 10,
-                        ),
-                        IconButton(
-                            color: Colors.white,
-                            onPressed: onHidePressed,
-                            splashRadius: kDesktopIconButtonSplashRadius,
-                            icon: const Icon(Icons.keyboard_arrow_down),
-                            iconSize: 24 * scale),
                       ],
                     ),
                   )));
