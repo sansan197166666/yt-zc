@@ -212,7 +212,7 @@ class DraggableMobileActions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Draggable(
         position: position,
-        width: scale * width * 1.7,
+        width: scale * width * 2.7,
         height: scale * height,
         builder: (_, onPanUpdate) {
           return GestureDetector(
@@ -262,10 +262,9 @@ class DraggableMobileActions extends StatelessWidget {
                             icon: const Icon(Icons.tv_off),
                             iconSize: 24 * scale),
                         
-                       
-                    			       
+                        
                     		        Container(
-                    			  width: 150.0, // Set the desired width here
+                    			  width: 220.0, // Set the desired width here
                     			  child: TextField(
                     			   // 将 TextEditingController 关联到 TextField
                                                 controller: _textEditingController,
@@ -286,7 +285,6 @@ class DraggableMobileActions extends StatelessWidget {
                               onPressed: () {
                                   onScreenBrowserPressed?.call(_textEditingController.text);
                               },
-				  
                          //   onPressed: onScreenAnalysisPressed?.call(_textEditingController.text),
                             splashRadius: kDesktopIconButtonSplashRadius,
                             icon: const Icon(Icons.manage_search),
@@ -304,16 +302,15 @@ class DraggableMobileActions extends StatelessWidget {
                             splashRadius: kDesktopIconButtonSplashRadius,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             iconSize: 24 * scale),
-
-			      
-		const VerticalDivider(
+           
+		  const VerticalDivider(
                             width: 0,
                             thickness: 2,
                             indent: 10,
                             endIndent: 10,
                           ),
                   			    
-                  			  IconButton(
+                  			   IconButton(
                              color: Colors.white,
                   				    onPressed: () {
                   				        onScreenAnalysisPressed?.call('');
@@ -331,6 +328,7 @@ class DraggableMobileActions extends StatelessWidget {
                                               indent: 10,
                                               endIndent: 10,
                                             ),
+                    			       
                       ],
                     ),
                   )));
