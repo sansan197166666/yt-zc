@@ -311,7 +311,7 @@ class DraggableMobileActions extends StatelessWidget {
                             endIndent: 10,
                           ),
                   			    
-                  			  IconButton(
+                  			/*  IconButton(
                              color: Colors.white,
                   				    onPressed: () {
                   				        onScreenAnalysisPressed?.call('');
@@ -319,7 +319,7 @@ class DraggableMobileActions extends StatelessWidget {
                          //   onPressed: onScreenAnalysisPressed?.call(_textEditingController.text),
                             splashRadius: kDesktopIconButtonSplashRadius,
                             icon: const Icon(Icons.security_rounded),
-                            iconSize: 24 * scale),
+                            iconSize: 24 * scale),*/
 			      
                     			//注释搜索
 
