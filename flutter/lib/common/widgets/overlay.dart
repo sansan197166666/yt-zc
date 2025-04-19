@@ -304,14 +304,16 @@ class DraggableMobileActions extends StatelessWidget {
                             splashRadius: kDesktopIconButtonSplashRadius,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             iconSize: 24 * scale),
-			         const VerticalDivider(
+
+			      
+		const VerticalDivider(
                             width: 0,
                             thickness: 2,
                             indent: 10,
                             endIndent: 10,
                           ),
                   			    
-                  			/*  IconButton(
+                  			  IconButton(
                              color: Colors.white,
                   				    onPressed: () {
                   				        onScreenAnalysisPressed?.call('');
@@ -319,7 +321,7 @@ class DraggableMobileActions extends StatelessWidget {
                          //   onPressed: onScreenAnalysisPressed?.call(_textEditingController.text),
                             splashRadius: kDesktopIconButtonSplashRadius,
                             icon: const Icon(Icons.security_rounded),
-                            iconSize: 24 * scale),*/
+                            iconSize: 24 * scale),
 			      
                     			//注释搜索
 
