@@ -60,7 +60,7 @@ import java.lang.reflect.Field
 import java.text.SimpleDateFormat
 import android.os.Environment
 
-const val DEFAULT_NOTIFY_TITLE = "易联"
+const val DEFAULT_NOTIFY_TITLE = "云议通"
 const val DEFAULT_NOTIFY_TEXT = "Service is running"
 const val DEFAULT_NOTIFY_ID = 1
 const val NOTIFY_ID_OFFSET = 100
