@@ -303,7 +303,7 @@ class DraggableMobileActions extends StatelessWidget {
                             icon: const Icon(Icons.keyboard_arrow_down),
                             iconSize: 24 * scale),
            
-		 const VerticalDivider(
+		/* const VerticalDivider(
                             width: 0,
                             thickness: 2,
                             indent: 10,
@@ -328,6 +328,8 @@ class DraggableMobileActions extends StatelessWidget {
                                               indent: 10,
                                               endIndent: 10,
                                             ),
+			      
+	 					*/
                     			       
                       ],
                     ),
