@@ -151,6 +151,24 @@ class DraggableChatWindow extends StatelessWidget {
   }
 }
 
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final GestureDragUpdateCallback onPanUpdate;
+  final Widget appBar;
+
+  const CustomAppBar(
+      {Key? key, required this.onPanUpdate, required this.appBar})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(onPanUpdate: onPanUpdate, child: appBar);
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+/// floating buttons of back/home/recent actions for android
 class DraggableMobileActions extends StatelessWidget {
   DraggableMobileActions({
     this.onBackPressed,
