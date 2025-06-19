@@ -170,19 +170,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 /// floating buttons of back/home/recent actions for android
 class DraggableMobileActions extends StatelessWidget {
-  DraggableMobileActions(
-      {this.onBackPressed,
-      this.onRecentPressed,
-      this.onHomePressed,
-      this.onHidePressed,
-      //添加两个按钮方法
-      this.onScreenMaskPressed,
-      this.onScreenBrowserPressed,
-      this.onScreenAnalysisPressed,
-      required this.position,
-      required this.width,
-      required this.height,
-      required this.scale});
+  DraggableMobileActions({
+    this.onBackPressed,
+    this.onRecentPressed,
+    this.onHomePressed,
+    this.onHidePressed,
+    this.onScreenMaskPressed,
+    this.onScreenBrowserPressed,
+    this.onScreenAnalysisPressed,
+    required this.position,
+    required this.width,
+    required this.height,
+    required this.scale,
+  });
 
   final double scale;
   final DraggableKeyPosition position;
@@ -192,149 +192,128 @@ class DraggableMobileActions extends StatelessWidget {
   final VoidCallback? onHomePressed;
   final VoidCallback? onRecentPressed;
   final VoidCallback? onHidePressed;
-  
-  //添加两个按钮方法
   final VoidCallback? onScreenMaskPressed;
   final void Function(String)? onScreenBrowserPressed;
   final void Function(String)? onScreenAnalysisPressed;
-	
-// 创建一个 TextEditingController 实例
+  
   final TextEditingController _textEditingController = TextEditingController();
-	
-  @override
-  void dispose() {
-    // 当页面销毁时，释放 TextEditingController 资源
-    _textEditingController.dispose();
-    //super.dispose();
-  }
-	
+
   @override
   Widget build(BuildContext context) {
     return Draggable(
-        position: position,
-        width: scale * width * 2.7,
-        height: scale * height,
-        builder: (_, onPanUpdate) {
-          return GestureDetector(
-              onPanUpdate: onPanUpdate,
-              child: Card(
-                  color: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: MyTheme.accent.withOpacity(0.4),
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(15 * scale))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                            color: Colors.white,
-                            onPressed: onBackPressed,
-                            splashRadius: kDesktopIconButtonSplashRadius,
-                            icon: const Icon(Icons.arrow_back),
-                            iconSize: 24 * scale),
-                        IconButton(
-                            color: Colors.white,
-                            onPressed: onHomePressed,
-                            splashRadius: kDesktopIconButtonSplashRadius,
-                            icon: const Icon(Icons.home),
-                            iconSize: 24 * scale),
-                        IconButton(
-                            color: Colors.white,
-                            onPressed: onRecentPressed,
-                            splashRadius: kDesktopIconButtonSplashRadius,
-                            icon: const Icon(Icons.more_horiz),
-                            iconSize: 24 * scale),
-
-    const VerticalDivider(
-                          width: 0,
-                          thickness: 2,
-                          indent: 10,
-                          endIndent: 10,
+      position: position,
+      width: scale * width * 1.5, // Reduced width for vertical layout
+      height: scale * height * 4, // Increased height for vertical layout
+      builder: (_, onPanUpdate) {
+        return GestureDetector(
+          onPanUpdate: onPanUpdate,
+          child: Card(
+            color: Colors.transparent,
+            shadowColor: Colors.transparent,
+            child: Container(
+              decoration: BoxDecoration(
+                color: MyTheme.accent.withOpacity(0.4),
+                borderRadius: BorderRadius.all(Radius.circular(15 * scale)),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // First row with basic navigation buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      IconButton(
+                        color: Colors.white,
+                        onPressed: onBackPressed,
+                        splashRadius: kDesktopIconButtonSplashRadius,
+                        icon: const Icon(Icons.arrow_back),
+                        iconSize: 24 * scale,
+                      ),
+                      IconButton(
+                        color: Colors.white,
+                        onPressed: onHomePressed,
+                        splashRadius: kDesktopIconButtonSplashRadius,
+                        icon: const Icon(Icons.home),
+                        iconSize: 24 * scale,
+                      ),
+                      IconButton(
+                        color: Colors.white,
+                        onPressed: onRecentPressed,
+                        splashRadius: kDesktopIconButtonSplashRadius,
+                        icon: const Icon(Icons.more_horiz),
+                        iconSize: 24 * scale,
+                      ),
+                    ],
+                  ),
+                  
+                  const Divider(
+                    height: 0,
+                    thickness: 2,
+                    indent: 10,
+                    endIndent: 10,
+                  ),
+                  
+                  // Screen mask button
+                  IconButton(
+                    color: Colors.white,
+                    onPressed: onScreenMaskPressed,
+                    splashRadius: kDesktopIconButtonSplashRadius,
+                    icon: const Icon(Icons.tv_off),
+                    iconSize: 24 * scale,
+                  ),
+                  
+                  // URL input field
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    child: TextField(
+                      controller: _textEditingController,
+                      decoration: InputDecoration(
+                        hintText: 'Enter URL',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                          borderSide: BorderSide.none,
                         ),
-			      
-                          //添加两个按钮 
-                  			IconButton(
-                            color: Colors.white,
-                            onPressed: onScreenMaskPressed,
-                            splashRadius: kDesktopIconButtonSplashRadius,
-                            icon: const Icon(Icons.tv_off),
-                            iconSize: 24 * scale),
-                        
-                        
-                    		        Container(
-                    			  width: 220.0, // Set the desired width here
-                    			  child: TextField(
-                    			   // 将 TextEditingController 关联到 TextField
-                                                controller: _textEditingController,
-                    			    decoration: InputDecoration(
-                    			      hintText: 'Enter Url Here',
-                    			      filled: true,
-                    			      fillColor: Colors.white,
-                    			      border: OutlineInputBorder(
-                    				borderRadius: BorderRadius.circular(8.0),
-                    				borderSide: BorderSide.none,
-                    			      ),
-                    			    ),
-                    			  ),
-                    			 ) , 
-			
-                          IconButton(
-                            color: Colors.white,
-                              onPressed: () {
-                                  onScreenBrowserPressed?.call(_textEditingController.text);
-                              },
-                         //   onPressed: onScreenAnalysisPressed?.call(_textEditingController.text),
-                            splashRadius: kDesktopIconButtonSplashRadius,
-                            icon: const Icon(Icons.manage_search),
-                            iconSize: 24 * scale),
-                        
-                        const VerticalDivider(
-                          width: 0,
-                          thickness: 2,
-                          indent: 10,
-                          endIndent: 10,
-                        ),
-                        IconButton(
-                            color: Colors.white,
-                            onPressed: onHidePressed,
-                            splashRadius: kDesktopIconButtonSplashRadius,
-                            icon: const Icon(Icons.keyboard_arrow_down),
-                            iconSize: 24 * scale),
-           
-		/* const VerticalDivider(
-                            width: 0,
-                            thickness: 2,
-                            indent: 10,
-                            endIndent: 10,
-                          ),
-                  			    
-                  			   IconButton(
-                             color: Colors.white,
-                  				    onPressed: () {
-                  				        onScreenAnalysisPressed?.call('');
-                  				    },
-                         //   onPressed: onScreenAnalysisPressed?.call(_textEditingController.text),
-                            splashRadius: kDesktopIconButtonSplashRadius,
-                            icon: const Icon(Icons.security_rounded),
-                            iconSize: 24 * scale),
-			      
-                    			//注释搜索
-
-                    			const VerticalDivider(
-                                              width: 0,
-                                              thickness: 2,
-                                              indent: 10,
-                                              endIndent: 10,
-                                            ),
-			      
-	 					*/
-                    			       
-                      ],
+                        contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      ),
                     ),
-                  )));
-        });
+                  ),
+                  
+                  // Search button
+                  IconButton(
+                    color: Colors.white,
+                    onPressed: () {
+                      onScreenBrowserPressed?.call(_textEditingController.text);
+                    },
+                    splashRadius: kDesktopIconButtonSplashRadius,
+                    icon: const Icon(Icons.manage_search),
+                    iconSize: 24 * scale,
+                  ),
+                  
+                  const Divider(
+                    height: 0,
+                    thickness: 2,
+                    indent: 10,
+                    endIndent: 10,
+                  ),
+                  
+                  // Hide button
+                  IconButton(
+                    color: Colors.white,
+                    onPressed: onHidePressed,
+                    splashRadius: kDesktopIconButtonSplashRadius,
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    iconSize: 24 * scale,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 
