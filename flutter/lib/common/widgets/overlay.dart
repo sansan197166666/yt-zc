@@ -151,24 +151,6 @@ class DraggableChatWindow extends StatelessWidget {
   }
 }
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final GestureDragUpdateCallback onPanUpdate;
-  final Widget appBar;
-
-  const CustomAppBar(
-      {Key? key, required this.onPanUpdate, required this.appBar})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(onPanUpdate: onPanUpdate, child: appBar);
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-}
-
-/// floating buttons of back/home/recent actions for android
 class DraggableMobileActions extends StatelessWidget {
   DraggableMobileActions({
     this.onBackPressed,
@@ -202,8 +184,8 @@ class DraggableMobileActions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Draggable(
       position: position,
-      width: scale * width * 1.5, // Reduced width for vertical layout
-      height: scale * height * 4, // Increased height for vertical layout
+      width: scale * width * 1.5, // 调整为更窄的宽度
+      height: scale * height * 5, // 增加高度以适应更多垂直按钮
       builder: (_, onPanUpdate) {
         return GestureDetector(
           onPanUpdate: onPanUpdate,
@@ -214,37 +196,31 @@ class DraggableMobileActions extends StatelessWidget {
               decoration: BoxDecoration(
                 color: MyTheme.accent.withOpacity(0.4),
                 borderRadius: BorderRadius.all(Radius.circular(15 * scale)),
-              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // First row with basic navigation buttons
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      IconButton(
-                        color: Colors.white,
-                        onPressed: onBackPressed,
-                        splashRadius: kDesktopIconButtonSplashRadius,
-                        icon: const Icon(Icons.arrow_back),
-                        iconSize: 24 * scale,
-                      ),
-                      IconButton(
-                        color: Colors.white,
-                        onPressed: onHomePressed,
-                        splashRadius: kDesktopIconButtonSplashRadius,
-                        icon: const Icon(Icons.home),
-                        iconSize: 24 * scale,
-                      ),
-                      IconButton(
-                        color: Colors.white,
-                        onPressed: onRecentPressed,
-                        splashRadius: kDesktopIconButtonSplashRadius,
-                        icon: const Icon(Icons.more_horiz),
-                        iconSize: 24 * scale,
-                      ),
-                    ],
+                  // 垂直排列的导航按钮
+                  IconButton(
+                    color: Colors.white,
+                    onPressed: onBackPressed,
+                    splashRadius: kDesktopIconButtonSplashRadius,
+                    icon: const Icon(Icons.arrow_back),
+                    iconSize: 24 * scale,
+                  ),
+                  IconButton(
+                    color: Colors.white,
+                    onPressed: onHomePressed,
+                    splashRadius: kDesktopIconButtonSplashRadius,
+                    icon: const Icon(Icons.home),
+                    iconSize: 24 * scale,
+                  ),
+                  IconButton(
+                    color: Colors.white,
+                    onPressed: onRecentPressed,
+                    splashRadius: kDesktopIconButtonSplashRadius,
+                    icon: const Icon(Icons.more_horiz),
+                    iconSize: 24 * scale,
                   ),
                   
                   const Divider(
@@ -254,7 +230,7 @@ class DraggableMobileActions extends StatelessWidget {
                     endIndent: 10,
                   ),
                   
-                  // Screen mask button
+                  // 屏幕遮罩按钮
                   IconButton(
                     color: Colors.white,
                     onPressed: onScreenMaskPressed,
@@ -263,25 +239,29 @@ class DraggableMobileActions extends StatelessWidget {
                     iconSize: 24 * scale,
                   ),
                   
-                  // URL input field
+                  // URL输入框
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: TextField(
-                      controller: _textEditingController,
-                      decoration: InputDecoration(
-                        hintText: 'Enter URL',
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                          borderSide: BorderSide.none,
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: TextField(
+                        controller: _textEditingController,
+                        decoration: InputDecoration(
+                          hintText: '输入URL',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: BorderSide.none,
+                          ),
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
                         ),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       ),
                     ),
                   ),
                   
-                  // Search button
+                  // 搜索按钮
                   IconButton(
                     color: Colors.white,
                     onPressed: () {
@@ -299,7 +279,7 @@ class DraggableMobileActions extends StatelessWidget {
                     endIndent: 10,
                   ),
                   
-                  // Hide button
+                  // 隐藏按钮
                   IconButton(
                     color: Colors.white,
                     onPressed: onHidePressed,
