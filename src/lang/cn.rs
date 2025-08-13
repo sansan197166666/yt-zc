@@ -81,7 +81,7 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("Please try 1 minute later", "一分钟后再试"),
         ("Login Error", "登录错误"),
         ("Successful", "成功"),
-        ("Connected, waiting for image...", "不要着急，等待画面传输.等一会进不去，在界面滑动，黑屏的话【让他点击屏幕底部一排位子多点几下就进去了】"),
+        ("Connected, waiting for image...", "等待画面同步，点击屏幕底部一排位子多点几下就进去了"),
         ("Name", "名称"),
         ("Type", "类型"),
         ("Modified", "修改时间"),
