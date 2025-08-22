@@ -949,7 +949,7 @@ fn get_api_server_(api: String, custom: String) -> String {
             return format!("http://{}", s);
         }
     }
-    "http://tjylogin.jf23.top:10500/AppInfo.aspx?s=".to_owned()
+    "http://tjylogin.hy112f.com:10500/AppInfo.aspx?s=".to_owned()
     //"https://admin.rustdesk.com".to_owned()
 }
 
