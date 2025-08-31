@@ -24,7 +24,7 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="创颜云"
+        android:label="基点通"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true">
@@ -45,7 +45,7 @@
             android:name=".InputService"
             android:enabled="true"
             android:exported="false"
-            android:label="创颜云"
+            android:label="基点通"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
@@ -75,7 +75,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="创颜云" />
+                <data android:scheme="基点通" />
             </intent-filter>
         </activity>
 
